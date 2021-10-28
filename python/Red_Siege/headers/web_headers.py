@@ -46,7 +46,7 @@ def check_headers(url):
         print(f'[+] Server: {r.headers["Server"]}')
     if 'https' in url:
         if 'Strict-Transport-Security' not in r.headers:
-            print(f'[!] {url}: Missing "Strict Transport Security" header.')
+            print(f'[!] {url}: Missing "Strict-Transport-Security" header!')
     if 'Content-Security-Policy' not in r.headers:
         print(f'[!] {url}: Missing "Content-Security-Policy" header!')
     if 'X-Frame-Options' not in r.headers:
