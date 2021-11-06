@@ -66,6 +66,7 @@ def arguments():
 
     return parser.parse_args()
 
+
 def file_to_list(filename):
     """
     Creates a list of items from a provided file
@@ -81,6 +82,7 @@ def file_to_list(filename):
             items.append(line.strip())
 
     return items
+
 
 def ssh_connect(username, password, ip_addr, port):
     """
