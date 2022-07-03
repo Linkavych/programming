@@ -1,3 +1,6 @@
 a.out
 *.pyc
 *.swp
+*.out
+*.o
+*.ko
