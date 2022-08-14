@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-A script for conducting a basic ping sweep of a given network range.
+A script for conducting a basic ping sweep of a given network range, then port
+scanning the ALIVE hosts, and finally conducting a limited service scan if
+HTTP, FTP, or SSH are present.
+
+Servioce scan is just a banner grab for  additional info.
 
 author: @linkavych
 date: 2022-08-13

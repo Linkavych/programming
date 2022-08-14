@@ -4,3 +4,4 @@ a.out
 *.out
 *.o
 *.ko
+*.bak
