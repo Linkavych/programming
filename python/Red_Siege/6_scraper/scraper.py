@@ -20,7 +20,8 @@ internal_urls = set()
 external_urls = set()
 
 total_urls_visited = 0
-WORDS = [] 
+WORDS = []
+
 
 def is_valid(url):
     """
@@ -81,10 +82,11 @@ def crawl(url, max_urls=30):
             break
         crawl(link, max_urls=max_urls)
 
+
 def get_words(link):
     try:
-        soup = BeautifulSoup(requests.get(link).text, 'html.parser')
-        for stuff in soup.find_all('p'):
+        soup = BeautifulSoup(requests.get(link).text, "html.parser")
+        for stuff in soup.find_all("p"):
             content = stuff.text
             words = content.lower().split()
 
@@ -94,10 +96,11 @@ def get_words(link):
                         continue
                     elif "https://" in word:
                         continue
-                    word = word.translate(str.maketrans('','',string.punctuation))
+                    word = word.translate(str.maketrans("", "", string.punctuation))
                     WORDS.append(word)
     except:
         pass
+
 
 def make_table():
     table = Table(title="Frequency of Words")
@@ -107,12 +110,20 @@ def make_table():
 
     return table
 
+
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser(description="Link Extractor Tool with Python")
     parser.add_argument("url", help="The URL to extract links from.")
-    parser.add_argument("-m", "--max-urls", help="Number of max URLs to crawl, default is 30.", default=30, type=int)
-    
+    parser.add_argument(
+        "-m",
+        "--max-urls",
+        help="Number of max URLs to crawl, default is 30.",
+        default=30,
+        type=int,
+    )
+
     args = parser.parse_args()
     url = args.url
     max_urls = args.max_urls
@@ -145,6 +156,3 @@ if __name__ == "__main__":
         table.add_row(item[0], str(item[1]))
 
     console.print(table)
-
-
-        

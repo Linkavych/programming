@@ -38,8 +38,9 @@ def unique_ips(traffic_capture):
 
     ip_list = open(output_filename + "_ips.txt", "w+")
     for ip in set(unique_ips):
-        ip_list.write("Host: " + ip + '\n')
+        ip_list.write("Host: " + ip + "\n")
     ip_list.close()
+
 
 #    for i in set(unique_ips):
 #        print(f"Host IP: {i}\n")
@@ -54,7 +55,9 @@ def TCP_conversations(tcp_pkts):
                 dst = pkt[IP].dst
                 sport = pkt[TCP].sport
                 dport = pkt[TCP].dport
-                conversations.append(f"Source IP: {src}:{sport}, Destination IP: {dst}:{dport}")
+                conversations.append(
+                    f"Source IP: {src}:{sport}, Destination IP: {dst}:{dport}"
+                )
             except:
                 pass
     except:
@@ -62,14 +65,15 @@ def TCP_conversations(tcp_pkts):
 
     conversation_list = open(output_filename + "_TCP_conversations.txt", "w+")
     for item in set(conversations):
-        conversation_list.write(item + '\n')
+        conversation_list.write(item + "\n")
     conversation_list.close()
+
 
 #    for item in set(conversations):
 #        print(item)
 
 # Capture any UDP conversations between systems
-def UDP_conversations(udp_pkts): # This function is not working yet! FIX
+def UDP_conversations(udp_pkts):  # This function is not working yet! FIX
     conversations = []
     try:
         for pkt in udp_pkts:
@@ -78,7 +82,9 @@ def UDP_conversations(udp_pkts): # This function is not working yet! FIX
                 dst = pkt[IP].dst
                 sport = pkt[UDP].sport
                 dport = pkt[UDP].dport
-                conversations.append(f"Source IP: {src}:{sport}, Destination IP: {dst}:{dport}")
+                conversations.append(
+                    f"Source IP: {src}:{sport}, Destination IP: {dst}:{dport}"
+                )
             except:
                 pass
     except:
@@ -86,8 +92,9 @@ def UDP_conversations(udp_pkts): # This function is not working yet! FIX
 
     conversations_list = open(output_filename + "_UDP_conversations.txt", "w+")
     for item in set(conversations):
-        conversations_list.append(item + '\n')
+        conversations_list.append(item + "\n")
     conversations_list.close()
+
 
 # Separates HTTP traffic and writes to a new pcap
 def web_pcap(traffic_capture):
@@ -110,7 +117,8 @@ def web_pcap(traffic_capture):
 
     wrpcap(output_filename + "_web_traffic.pcap", web_chat)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unique_ips(traffic_capture)
     TCP_conversations(traffic_capture)
     web_pcap(traffic_capture)

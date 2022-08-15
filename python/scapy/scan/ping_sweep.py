@@ -6,8 +6,6 @@ import random, sys
 from scapy.all import ICMP, IP, sr1, TCP
 
 
-
-
 # Define IP range to ping
 network = str(sys.argv[1])
 
@@ -17,22 +15,26 @@ live_count = 0
 
 # Send ICMP ping request, wait for answer
 for host in addresses:
-    if (host in (addresses.network_address, addresses.broadcast_address)):
+    if host in (addresses.network_address, addresses.broadcast_address):
         # Skip network and broadcast addresses
         continue
 
     resp = sr1(
-        IP(dst=str(host))/ICMP(),
+        IP(dst=str(host)) / ICMP(),
         timeout=2,
         verbose=0,
     )
 
     if resp is None:
         print(f"{host} is down or not responding.")
-    elif (
-        int(resp.getlayer(ICMP).type)==3 and
-        int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
-    ):
+    elif int(resp.getlayer(ICMP).type) == 3 and int(resp.getlayer(ICMP).code) in [
+        1,
+        2,
+        3,
+        9,
+        10,
+        13,
+    ]:
         print(f"{host} is blocking ICMP.")
     else:
         print(f"{host} is responding.")

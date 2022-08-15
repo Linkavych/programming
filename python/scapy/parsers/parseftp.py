@@ -5,8 +5,9 @@ import sys
 
 pkts = rdpcap(sys.argv[1])
 
-pkt_info = [] 
+pkt_info = []
 creds = []
+
 
 def parse_ftp(pkts):
     for pkt in pkts:
@@ -16,12 +17,12 @@ def parse_ftp(pkts):
         except Exception as e:
             pass
 
+
 def grab_cred_ftp(pkt_info):
     for pkt in pkt_info:
         for x in pkt_info.split():
-            if 'USER' in x:
+            if "USER" in x:
                 print(x)
-
 
 
 parse_ftp(pkts)

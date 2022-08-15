@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from scapy.all import *
 
-pkts = PcapReader('2020-11-13-traffic-analysis-exercise.pcap')
+pkts = PcapReader("2020-11-13-traffic-analysis-exercise.pcap")
 udp_pkts = []
 
 for pkt in pkts:
@@ -10,8 +10,9 @@ for pkt in pkts:
 
 print(len(udp_pkts))
 
+
 def udp_parse(udp_pkts):
-    conversations = [] 
+    conversations = []
     for pkt in udp_pkts:
         src = pkt[IP].src
         dst = pkt[IP].dst
@@ -19,9 +20,10 @@ def udp_parse(udp_pkts):
         dport = pkt[UDP].dport
         conversations.append(f"Source: {src}:{sport}, Destination: {dst}:{dport}")
 
-    udp_conversations = open('UDP_Conversations.txt', 'w+')
+    udp_conversations = open("UDP_Conversations.txt", "w+")
     for item in set(conversations):
-        udp_conversations.write(item + '\n')
+        udp_conversations.write(item + "\n")
     udp_conversations.close()
+
 
 udp_parse(udp_pkts)

@@ -66,7 +66,9 @@ def main(
     path: str = typer.Option(..., help="Path from which to being the search."),
     ext: str = typer.Option("", help="Newline separated file of fil extensions"),
     names: str = typer.Option("", help="Newline separated file of file names"),
-    strings: str = typer.Option("", help="Newline separated file of strings to search."),
+    strings: str = typer.Option(
+        "", help="Newline separated file of strings to search."
+    ),
 ):
     """
     Main function for processing our search for interesting information
@@ -148,6 +150,7 @@ def main(
         table.add_row(tup[0], tup[1], tup[2])
 
     print(table)
+
 
 if __name__ == "__main__":
     typer.run(main)

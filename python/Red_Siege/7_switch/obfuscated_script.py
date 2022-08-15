@@ -16,46 +16,46 @@ import string
 import typer
 
 
-def randomizer(lnt: int):
+def MKVFbdsgGf(lnt: int):
     """
     Return a random string of length lnt
     """
-    ltrs = string.ascii_letters
-    print(ltrs)
-    return "".join(random.choices(ltrs, k=lnt))
+    oGtb = string.ascii_letters
+    print(oGtb)
+    return "".join(random.choices(oGtb, k=lnt))
 
 
-def replacer(variables: list, funcs: list, script: str):
+def rkzgKcUo(oueqpqvtv: list, YRzCP: list, script: str):
     with open(script, "r") as f:
-        data = f.read()
-        for var in variables:
+        xCvT = f.read()
+        for var in oueqpqvtv:
             if "__name__" == var or "str" == var:
                 continue
             else:
-                data = data.replace(var, randomizer(len(var)))
-        for func in funcs:
+                xCvT = xCvT.replace(var, MKVFbdsgGf(len(var)))
+        for func in YRzCP:
             if "main" == func:
                 continue
             else:
-                data = data.replace(func, randomizer(len(func)))
+                xCvT = xCvT.replace(func, MKVFbdsgGf(len(func)))
 
     with open("obfuscated_script.py", "w") as fd:
-        fd.write(data)
+        fd.write(xCvT)
 
 
 def main(script: str = typer.Argument(..., help="The name of a script to alter.")):
-    filename = script
+    pKmLPpcD = script
     with open(script, "r") as fd:
-        data = fd.read()
+        xCvT = fd.read()
 
-    variables = re.findall(r"[a-zA-Z_]+\s=", data)
-    funcs = re.findall(r"def\s[a-zA-z_]+", data)
+    oueqpqvtv = re.findall(r"[a-zA-Z_]+\s=", xCvT)
+    YRzCP = re.findall(r"def\s[a-zA-z_]+", xCvT)
 
-    variables = [i[:-2] for i in variables]
-    funcs = [i[4:] for i in funcs]
-    print(variables)
-    print(funcs)
-    replacer(list(set(variables)), list(set(funcs)), filename)
+    oueqpqvtv = [i[:-2] for i in oueqpqvtv]
+    YRzCP = [i[4:] for i in YRzCP]
+    print(oueqpqvtv)
+    print(YRzCP)
+    rkzgKcUo(list(set(oueqpqvtv)), list(set(YRzCP)), pKmLPpcD)
 
 
 if __name__ == "__main__":

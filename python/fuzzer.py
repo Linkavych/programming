@@ -186,7 +186,7 @@ class AsyncURLFuzz(object):
             )
         )
 
-        if 0 >=  async_workers:
+        if 0 >= async_workers:
             self._logger.error("DDOS protection likely in place.")
             return
 
@@ -261,7 +261,7 @@ class AsyncURLFuzz(object):
             )
         )
 
-        with open(self._output_file_path, 'w') as output_file:
+        with open(self._output_file_path, "w") as output_file:
             output_lines.sort()
             output_file.write(os.linesep.join(output_lines))
 

