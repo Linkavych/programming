@@ -5,3 +5,8 @@ a.out
 *.o
 *.ko
 *.bak
+
+debug/
+target/
+**/*.rs.bk
+*.pdb
