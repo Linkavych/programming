@@ -10,3 +10,5 @@ debug/
 target/
 **/*.rs.bk
 *.pdb
+*.local
+*.txt
