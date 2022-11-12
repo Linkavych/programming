@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     if ((dp = opendir(argv[1])) == NULL)
         err_sys("[!] Cannot open %s", argv[1]);
     
-    while ((dirp == readdir(dp)) != NULL)
+    while ((dirp = readdir(dp)) != NULL)
         printf("%s\n", dirp->d_name);
 
     closedir(dp);
