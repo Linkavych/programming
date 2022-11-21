@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Script that shows the time and date
+# Shows all logged in users
+# Provides the system uptime
+# All information saved to a logfile
+
+LOGFILE=systeminfo.log
+TIME=$(/usr/bin/date)
+USERS=$(/usr/bin/who)
+UPTIME=$(/usr/bin/uptime -s)
+
+echo -e "Time is: $TIME\n" | tee -a $LOGFILE
+echo "Logged on users:" | tee -a $LOGFILE
+echo -e "$USERS\n" | tee -a $LOGFILE
+echo "System has been up since: $UPTIME" | tee -a $LOGFILE
+
+exit 0

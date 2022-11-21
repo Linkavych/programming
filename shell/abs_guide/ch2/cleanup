@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# Cleanup script - version 3
+# From ABS Guide
+
+LOG_DIR=/var/log
+ROOT_UID=0
+LINES=50
+E_XCD=86
+E_NOTROOT=87
+
+# Check for root uid
+if [ "$UID" -ne "$ROOT_UID" ]; then
+    echo "[!] Must be root to run this script."
+    exit $E_NOTROOT
+fi
+
+#test for command line arguments
+if [ -n "$1" ]; then
+    lines=$1
+else
+    lines=$LINES
+fi
+
+cd $LOG_DIR || {
+    echo "[!] Cannot change to required directory: $LOG_DIR" >&2
+    exit $E_XCD;
+}
+
+# Save last lines of log file
+tail -n $lines messages > mesg.tmp
+mv mesg.tmp messages
+
+cat /dev/null > wtmp
+
+echo "[+] Log files are cleaned."
+
+exit 0
+
