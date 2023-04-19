@@ -25,8 +25,10 @@ ENCRYPTED="backup.tgz.enc"
 /usr/bin/tar czf "$COMPRESSED" "$DIRPATH"
 
 # Encrypt using openssl
-echo '[+] Encrypting archive. Please submit a password'
+echo '[+] Encrypting archive. Please submit a password.'
 /usr/bin/openssl enc -aes-256-cbc -in "$COMPRESSED" -out "$ENCRYPTED" -pbkdf2
+
+# DECOMPRESSION: `openssl enc -d -aes-256-cbc -in <file> -out <outfile> -pbkdf2`
 
 # Clean up
 /usr/bin/rm -f "$COMPRESSED"
