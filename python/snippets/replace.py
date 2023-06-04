@@ -2,7 +2,7 @@
 """
 FILE: replace.py
 
-USAGE: ./replace.py
+USAGE: ./replace.py <path>
 
 DESCRIPTION: Replace any files with a space in their name with an '_'; non-recursive
 
@@ -14,19 +14,14 @@ VERSION: 0.1
 LICENSE: BSD 3-Clause (Provided in repository)
 """
 import os
+import sys
 
-# Get the directory
-current_dir = os.getcwd()
+path = sys.argv[1]
 
-# Get the file listing
-files = os.listdir(current_dir)
-
-# Loop
-for file in files:
-    if " " in file:
-        new_name = file.replace(" ", "_")
-
-        #rename
-        os.rename(file, new_name)
-
-print("[+] Completed renaming!")
+for path, folders, files in os.walk(path):
+    for f in files:
+        os.rename(os.path.join(path, f), os.path.join(path, f.replace(' ', '_')))
+    for i in range(len(folders)):
+        new_name = folders[i].replace(' ', '_')
+        os.rename(os.path.join(path, folders[i]), os.path.join(path, new_name))
+        folders[i] = new_name

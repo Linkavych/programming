@@ -54,6 +54,6 @@ for f in $files; do
 done
 
 # Compress the data
-tar cjvf "$archive_name.tar.bz2" "$archive_dir"
+tar cJvf "$archive_name.tar.xz" "$archive_dir"
 
 
